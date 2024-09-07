@@ -13,15 +13,13 @@ def main():
     client_socket, client_address = server_socket.accept() # wait for client
     print(f"Connection established wih {client_address}")
 
-    data = client_socket.recv(2048)
-    print(f"Received data: `{data.decode()}`")
+    while True:
+        req = client_socket.recv(1024)
+        data = req.decode()
 
-    commands = data.split(b'\r\n')
+        if "ping" in data.lower():
+            client_socket.send(b'+PONG\r\n')
 
-    for i in range(len(commands)):
-        print(f"Received data: `{data.decode()}`")
-        resp =  b'+PONG\r\n'
-        client_socket.send(resp)
 
     client_socket.close()
 

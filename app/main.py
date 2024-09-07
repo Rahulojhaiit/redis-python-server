@@ -19,6 +19,7 @@ def main():
     resp =  b'+PONG\r\n'
     client_socket.send(resp)
     data = client_socket.recv(2048)
+    
     if data: 
         print(f"Received data: `{data.decode()}`")
         resp =  b'+PONG\r\n'

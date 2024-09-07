@@ -16,11 +16,9 @@ def main():
     data = client_socket.recv(2048)
     print(f"Received data: `{data.decode()}`")
 
-    resp =  b'+PONG\r\n'
-    client_socket.send(resp)
-    data = client_socket.recv(2048)
-    
-    if data: 
+    commands = data.split(b'\r\n')
+
+    for i in range(len(commands)):
         print(f"Received data: `{data.decode()}`")
         resp =  b'+PONG\r\n'
         client_socket.send(resp)
